@@ -9,13 +9,13 @@ type PillButtonProps = {
 export default function PillButton(props: PillButtonProps) {
   return (
     <Form
-      className={"pill-button my-row center-align "
+      className={"pill-button-form my-row center-align "
         .concat(props.colorClass)
         .trim()}
       action={props.route}
       method="post"
     >
-      <button>{props.text}</button>
+      <button className="pill-button">{props.text}</button>
     </Form>
   );
 }

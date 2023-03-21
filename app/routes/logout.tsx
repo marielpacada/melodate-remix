@@ -4,6 +4,7 @@ import { json, redirect } from "@remix-run/node";
 import { destroySession, getSession } from "~/services/session.server";
 
 export async function action({ request }: ActionArgs) {
+  console.log("hi i am in logout action");
   return redirect("/", {
     headers: {
       "Set-Cookie": await destroySession(
@@ -14,5 +15,6 @@ export async function action({ request }: ActionArgs) {
 }
 
 export function loader() {
+  console.log("log me out!");
   throw json({}, { status: 404 });
 }
