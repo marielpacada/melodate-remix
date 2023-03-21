@@ -15,6 +15,17 @@ html body {
     background-color: #fff6de;
 }
 
+button {
+    border: none;
+    background: none;
+    font-family: "futura", Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 .full-width-div {
     width: 100%;
     text-align: center;
@@ -38,17 +49,6 @@ html body {
     width: 10rem;
 }
 
-button {
-    border: none;
-    background: none;
-    font-family: "futura", Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1rem;
-}
-
-button:hover {
-    cursor: pointer;
-}
-
 .pill-button-form {
     height: 3rem;
     width: 65%;
@@ -66,10 +66,6 @@ button:hover {
     color: #0D89D8;
     font-size: .8rem;
     text-decoration: underline;
-}
-
-.inline-child {
-    display: inline-block;
 }
 
 .green-button {
