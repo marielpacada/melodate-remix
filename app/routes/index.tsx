@@ -10,6 +10,7 @@ export async function loader({ request }: LoaderArgs) {
 export default function Index() {
   const data = useLoaderData<typeof loader>();
   const user = data?.user;
+  const name = user?.name as string;
 
   return (
     <div className="full-page my-col even-space-align">
@@ -21,7 +22,7 @@ export default function Index() {
       <div className="landing-text">find your love at first note</div>
       <PillButton
         colorClass="green-button"
-        text={user ? "already logged in" : "login to spotify"}
+        text={user ? "hello, ".concat(name) : "login to spotify"}
         route="/auth/spotify"
       />
     </div>

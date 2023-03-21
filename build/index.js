@@ -34,7 +34,7 @@ var entry_server_node_exports = {};
 __export(entry_server_node_exports, {
   default: () => handleRequest
 });
-var import_stream = require("stream"), import_node = require("@remix-run/node"), import_react = require("@remix-run/react"), import_isbot = __toESM(require("isbot")), import_server = require("react-dom/server"), import_jsx_dev_runtime = require("react/jsx-dev-runtime"), ABORT_DELAY = 5e3;
+var import_stream = require("stream"), import_node = require("@remix-run/node"), import_react = require("@remix-run/react"), import_isbot = __toESM(require("isbot")), import_server = require("react-dom/server"), import_jsx_runtime = require("react/jsx-runtime"), ABORT_DELAY = 5e3;
 function handleRequest(request, responseStatusCode, responseHeaders, remixContext) {
   return (0, import_isbot.default)(request.headers.get("user-agent")) ? handleBotRequest(
     request,
@@ -51,21 +51,13 @@ function handleRequest(request, responseStatusCode, responseHeaders, remixContex
 function handleBotRequest(request, responseStatusCode, responseHeaders, remixContext) {
   return new Promise((resolve, reject) => {
     let { pipe, abort } = (0, import_server.renderToPipeableStream)(
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
         import_react.RemixServer,
         {
           context: remixContext,
           url: request.url,
           abortDelay: ABORT_DELAY
-        },
-        void 0,
-        !1,
-        {
-          fileName: "node_modules/@remix-run/dev/dist/config/defaults/entry.server.node.tsx",
-          lineNumber: 39,
-          columnNumber: 7
-        },
-        this
+        }
       ),
       {
         onAllReady() {
@@ -91,21 +83,13 @@ function handleBotRequest(request, responseStatusCode, responseHeaders, remixCon
 function handleBrowserRequest(request, responseStatusCode, responseHeaders, remixContext) {
   return new Promise((resolve, reject) => {
     let { pipe, abort } = (0, import_server.renderToPipeableStream)(
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
+      /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
         import_react.RemixServer,
         {
           context: remixContext,
           url: request.url,
           abortDelay: ABORT_DELAY
-        },
-        void 0,
-        !1,
-        {
-          fileName: "node_modules/@remix-run/dev/dist/config/defaults/entry.server.node.tsx",
-          lineNumber: 81,
-          columnNumber: 7
-        },
-        this
+        }
       ),
       {
         onShellReady() {
@@ -138,63 +122,27 @@ __export(root_exports, {
 });
 
 // app/shared/styles/styles.css
-var styles_default = "/build/_assets/styles-UST2XE5R.css";
+var styles_default = "/build/_assets/styles-MVQWT7XF.css";
 
 // app/root.tsx
-var import_react2 = require("@remix-run/react"), import_jsx_dev_runtime2 = require("react/jsx-dev-runtime"), links = () => [{ rel: "stylesheet", href: styles_default }], meta = () => ({
+var import_react2 = require("@remix-run/react"), import_jsx_runtime2 = require("react/jsx-runtime"), links = () => [{ rel: "stylesheet", href: styles_default }], meta = () => ({
   charset: "utf-8",
   title: "New Remix App",
   viewport: "width=device-width,initial-scale=1"
 });
 function App() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("html", { lang: "en", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("head", { children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.Meta, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 27,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.Links, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 28,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/root.tsx",
-      lineNumber: 26,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("body", { children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.Outlet, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 31,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.ScrollRestoration, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 32,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.Scripts, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 33,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_react2.LiveReload, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 34,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/root.tsx",
-      lineNumber: 30,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/root.tsx",
-    lineNumber: 25,
-    columnNumber: 5
-  }, this);
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("html", { lang: "en", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("head", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react2.Meta, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react2.Links, {})
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("body", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react2.Outlet, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react2.ScrollRestoration, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react2.Scripts, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_react2.LiveReload, {})
+    ] })
+  ] });
 }
 
 // app/routes/auth/spotify.callback.tsx
@@ -214,7 +162,7 @@ var import_node2 = require("@remix-run/node"), sessionStorage = (0, import_node2
     path: "/",
     httpOnly: !0,
     secrets: ["s3cr3t"],
-    secure: !1
+    secure: !0
   }
 }), { getSession, commitSession, destroySession } = sessionStorage;
 
@@ -225,7 +173,11 @@ if (!process.env.SPOTIFY_CLIENT_SECRET)
   throw new Error("Missing SPOTIFY_CLIENT_SECRET env");
 if (!process.env.SPOTIFY_CALLBACK_URL)
   throw new Error("Missing SPOTIFY_CALLBACK_URL env");
-var scopes = ["user-top-read", "playlist-modify-public", "user-follow-modify"].join(" "), spotifyStrategy = new import_remix_auth_spotify.SpotifyStrategy(
+var scopes = [
+  "user-top-read",
+  "playlist-modify-public",
+  "user-follow-modify"
+].join(" "), spotifyStrategy = new import_remix_auth_spotify.SpotifyStrategy(
   {
     clientID: process.env.SPOTIFY_CLIENT_ID,
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
@@ -305,85 +257,49 @@ __export(routes_exports, {
 var import_react4 = require("@remix-run/react");
 
 // app/shared/components/PillButton.tsx
-var import_react3 = require("@remix-run/react"), import_jsx_dev_runtime3 = require("react/jsx-dev-runtime");
+var import_react3 = require("@remix-run/react"), import_jsx_runtime3 = require("react/jsx-runtime");
 function PillButton(props) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
     import_react3.Form,
     {
       className: "pill-button my-row center-align ".concat(props.colorClass).trim(),
       action: props.route,
       method: "post",
-      children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { children: props.text }, void 0, !1, {
-        fileName: "app/shared/components/PillButton.tsx",
-        lineNumber: 18,
-        columnNumber: 7
-      }, this)
-    },
-    void 0,
-    !1,
-    {
-      fileName: "app/shared/components/PillButton.tsx",
-      lineNumber: 11,
-      columnNumber: 5
-    },
-    this
+      children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { children: props.text })
+    }
   );
 }
 
 // app/routes/index.tsx
-var import_jsx_dev_runtime4 = require("react/jsx-dev-runtime");
+var import_jsx_runtime4 = require("react/jsx-runtime");
 async function loader4({ request }) {
   return spotifyStrategy.getSession(request);
 }
 function Index() {
-  let data = (0, import_react4.useLoaderData)(), user = data == null ? void 0 : data.user;
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "full-page my-col even-space-align", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+  let data = (0, import_react4.useLoaderData)(), user = data == null ? void 0 : data.user, name = user == null ? void 0 : user.name;
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "full-page my-col even-space-align", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
       "img",
       {
         className: "melodate-logo",
         src: "melodate-logo.svg",
         alt: "melodate logo"
-      },
-      void 0,
-      !1,
-      {
-        fileName: "app/routes/index.tsx",
-        lineNumber: 16,
-        columnNumber: 7
-      },
-      this
+      }
     ),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "landing-text", children: "find your love at first note" }, void 0, !1, {
-      fileName: "app/routes/index.tsx",
-      lineNumber: 21,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "landing-text", children: "find your love at first note" }),
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
       PillButton,
       {
         colorClass: "green-button",
-        text: user ? "already logged in" : "login to spotify",
+        text: user ? "hello, ".concat(name) : "login to spotify",
         route: "/auth/spotify"
-      },
-      void 0,
-      !1,
-      {
-        fileName: "app/routes/index.tsx",
-        lineNumber: 22,
-        columnNumber: 7
-      },
-      this
+      }
     )
-  ] }, void 0, !0, {
-    fileName: "app/routes/index.tsx",
-    lineNumber: 15,
-    columnNumber: 5
-  }, this);
+  ] });
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "010a1385", entry: { module: "/build/entry.client-UOPA7FDE.js", imports: ["/build/_shared/chunk-U37AYAMS.js", "/build/_shared/chunk-5KL4PAQL.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-OZFVFRS7.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/auth/spotify": { id: "routes/auth/spotify", parentId: "root", path: "auth/spotify", index: void 0, caseSensitive: void 0, module: "/build/routes/auth/spotify-2WAX2M5X.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/auth/spotify.callback": { id: "routes/auth/spotify.callback", parentId: "root", path: "auth/spotify/callback", index: void 0, caseSensitive: void 0, module: "/build/routes/auth/spotify.callback-C3OC2QTI.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-Z42JVNS4.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-DOMDNNGV.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, hmr: void 0, url: "/build/manifest-010A1385.js" };
+var assets_manifest_default = { version: "f9ce29c6", entry: { module: "/build/entry.client-KMLSDIUS.js", imports: ["/build/_shared/chunk-HRGT5UAV.js", "/build/_shared/chunk-Q3IECNXJ.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-XMJII2QL.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/auth/spotify": { id: "routes/auth/spotify", parentId: "root", path: "auth/spotify", index: void 0, caseSensitive: void 0, module: "/build/routes/auth/spotify-JTSZ3MEP.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/auth/spotify.callback": { id: "routes/auth/spotify.callback", parentId: "root", path: "auth/spotify/callback", index: void 0, caseSensitive: void 0, module: "/build/routes/auth/spotify.callback-XSQ4CKVG.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-5CV2KA2F.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-GPTXG6BX.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, hmr: void 0, url: "/build/manifest-F9CE29C6.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { unstable_cssModules: !1, unstable_cssSideEffectImports: !1, unstable_dev: !1, unstable_postcss: !1, unstable_tailwind: !1, unstable_vanillaExtract: !1, v2_errorBoundary: !1, v2_meta: !1, v2_routeConvention: !1 }, publicPath = "/build/", entry = { module: entry_server_node_exports }, routes = {
@@ -437,4 +353,3 @@ var assetsBuildDirectory = "public/build", future = { unstable_cssModules: !1, u
   publicPath,
   routes
 });
-//# sourceMappingURL=index.js.map
