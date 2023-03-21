@@ -8,6 +8,5 @@ export function loader() {
 }
 
 export async function action({ request }: ActionArgs) {
-  console.log(request);
   return await authenticator.authenticate("spotify", request);
 }

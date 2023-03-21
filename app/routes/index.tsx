@@ -1,6 +1,8 @@
 import type { LoaderArgs } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
+
 import { spotifyStrategy } from "~/services/auth.server";
+
 import PillButton from "~/shared/components/PillButton";
 
 export async function loader({ request }: LoaderArgs) {
@@ -31,7 +33,7 @@ export default function Index() {
         {user && (
           <div className="full-width-div">
             <p className="inline-child">not you?</p>
-            <Form className="inline-child" action="/logout">
+            <Form className="inline-child" action="/logout" method="post">
               <button className="logout-button">logout</button>
             </Form>
           </div>
