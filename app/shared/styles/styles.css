@@ -81,7 +81,9 @@ button:hover {
 }
 
 .logout-text {
+    width: 55%;
     font-size: .8rem;
+    overflow-wrap: break-word;
 }
 
 /* ----------------------------------------------ROW AND COL----------------------------------------------- */
