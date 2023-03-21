@@ -1,0 +1,92 @@
+/* app/shared/styles/styles.css */
+@font-face {
+  font-family: futura;
+  src: url(/build/_assets/futura-medium-SMJKQLS7.ttf);
+}
+html body {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family:
+    futura,
+    Verdana,
+    Geneva,
+    Tahoma,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fff6de;
+}
+button {
+  border: none;
+  border-radius: 70px;
+  background: none;
+  font-family:
+    futura,
+    Verdana,
+    Geneva,
+    Tahoma,
+    sans-serif;
+  font-size: 1rem;
+  height: 100%;
+  width: 100%;
+}
+button:hover {
+  cursor: pointer;
+}
+.full-page {
+  height: 95vh;
+  width: 100vw;
+}
+@media (min-width: 800px) {
+  .full-page {
+    height: 95vh;
+    width: 35vw;
+  }
+}
+.melodate-logo {
+  height: 10rem;
+  width: 10rem;
+}
+.landing-text {
+  font-size: 1.5rem;
+}
+.pill-button {
+  height: 3rem;
+  width: 65%;
+  border: solid 3px;
+  border-radius: 70px;
+}
+.green-button {
+  background-color: #effff1;
+}
+.my-row {
+  display: flex;
+  flex-direction: row;
+}
+.my-col {
+  display: flex;
+  flex-direction: column;
+}
+.center-align {
+  justify-content: center;
+  align-items: center;
+}
+.top-left-align {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.start-center-align {
+  justify-content: flex-start;
+  align-items: center;
+}
+.even-space-align {
+  justify-content: space-evenly;
+  align-items: center;
+}
+.space-btwn-align {
+  justify-content: space-between;
+  align-items: center;
+}
