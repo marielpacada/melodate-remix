@@ -1,3 +1,9 @@
+import SwipeCard from "~/shared/components/SwipeCard.client";
+
+const Fallback = () => {
+  return <div>Loading IDE...</div>;
+};
+
 export default function Swipe() {
-  return <div>hi there!</div>;
+  return typeof document !== "undefined" ? <SwipeCard /> : <Fallback />;
 }
