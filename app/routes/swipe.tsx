@@ -5,5 +5,9 @@ const Fallback = () => {
 };
 
 export default function Swipe() {
-  return typeof document !== "undefined" ? <SwipeCard /> : <Fallback />;
+  return (
+    <div className="full-page my-col center-align even-space-align">
+      {typeof document !== "undefined" ? <SwipeCard /> : <Fallback />}
+    </div>
+  );
 }
