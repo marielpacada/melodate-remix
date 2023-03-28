@@ -1,5 +1,6 @@
 import type { LoaderArgs } from "@remix-run/node";
 // import { useLoaderData } from "@remix-run/react";
+import { getRelatedArtists } from "~/services/artist.server";
 
 import SwipeCard from "~/shared/components/SwipeCard.client";
 
@@ -8,8 +9,8 @@ const Fallback = () => {
 };
 
 export async function loader({ request }: LoaderArgs) {
-  // return getUserTopArtists(request);
-  return {};
+  return getRelatedArtists(request);
+  // return {};
 }
 
 export default function Swipe() {
