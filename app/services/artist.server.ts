@@ -18,44 +18,113 @@ const getUserTopArtists = async (request: Request) => {
   const response = await getFetchResponse(request, url);
 
   const topArtistIds = [];
+  const topArtists = response["items"];
 
-  const topArtists = response["items" as keyof object];
   for (var artist of topArtists) {
-    topArtistIds.push(artist["id" as keyof object]);
+    topArtistIds.push(artist["id"]);
   }
 
   return topArtistIds;
 };
 
-export const getRelatedArtists = async (request: Request) => {
+const getArtistTopTrack = async (request: Request, artistId: string) => {
+  const url =
+    "https://api.spotify.com/v1/artists/" + artistId + "/top-tracks?country=US";
+  const response = await getFetchResponse(request, url);
+
+  if (response["tracks"].length === 0) return {};
+
+  const track = response["tracks"][0];
+  const trackData = {
+    id: track["id"],
+    title: track["name"],
+    image: "placeholder image", // you can actually get this from the response :)
+    // see the old version
+    preview: track["preview_url"],
+  };
+
+  return trackData;
+};
+
+const getRandomArtists = async (count: number) => {
+  const randomPick = (values: string[]) => {
+    const index = Math.floor(Math.random() * values.length);
+    return values[index];
+  };
+
+  const recordCount = await db.artist.count();
+  const skip = Math.max(0, Math.floor(Math.random() * recordCount) - count);
+  const orderDirection = randomPick(["asc", "desc"]);
+  const orderBy = randomPick([
+    "id",
+    "name",
+    "genre",
+    "followers",
+    "popularity",
+  ]);
+
+  return await db.artist.findMany({
+    take: count,
+    skip: skip,
+    orderBy: { [orderBy]: orderDirection },
+  });
+};
+
+const seedArtistData = async (request: Request) => {
   const artistIds = await getUserTopArtists(request);
 
   for (var id of artistIds) {
     const url = "https://api.spotify.com/v1/artists/" + id + "/related-artists";
     const response = await getFetchResponse(request, url);
-    const relatedArtists = response["artists" as keyof object]; // returns 20 artists
+    const relatedArtists = response["artists"]; // returns 20 artists
 
     for (var artist of relatedArtists) {
-      const data = {
-        id: artist["id" as keyof object],
-        name: artist["name" as keyof object],
-        genre: artist["genres" as keyof object].toString(),
-        followers: artist["followers" as keyof object]["total" as keyof object],
-        image: artist["images" as keyof object][0]["url" as keyof object],
-        popularity: artist["popularity" as keyof object],
+      const artistData = {
+        id: artist["id"],
+        name: artist["name"],
+        genre: artist["genres"].toString(),
+        followers: artist["followers"]["total"],
+        image: artist["images"][0]["url"],
+        popularity: artist["popularity"],
       };
 
-      const doesExist = await db.artist.findUnique({
+      const doesArtistExist = await db.artist.findUnique({
         where: {
-          id: data["id" as keyof object],
+          id: artistData["id"],
         },
       });
 
-      if (!doesExist) {
-        await db.artist.create({ data });
+      if (!doesArtistExist) {
+        await db.artist.create({ data: artistData });
       }
     }
   }
 
+  // return the random 30 artists!!!!
+  return await getRandomArtists(30);
+};
+
+export const seedTrackData = async (request: Request) => {
+  const artistsToServe = await seedArtistData(request);
+
   return {};
 };
+
+// the database is populated with related artists of user's top artists
+// now what?
+
+// what do we want to serve to swipe?
+// first, how many?                         30
+// second, that meet which requirements?    some kind of popularity metric???
+
+// CRISIS:   our current model does not already have the artist's top track
+//           we would have to call another endpoint to get their top track
+
+// QUESTION: do we want to do this for all the related artists?
+//           or do we want to do this only for those we have chosen that we are going to serve to the component?
+//
+//
+// THIS ALL TAKES TOO LONG
+// solutions:
+//    - get the random artists server side
+//    - populate the track field of those artists only

@@ -8,17 +8,20 @@ datasource db {
 }
 
 model Artist {
-  id         String @id @default(uuid())
+  id         String  @id @default(uuid())
   name       String
   genre      String
   followers  Int
   image      String
   popularity Int
+  track      Track?  @relation(fields: [trackId], references: [id])
+  trackId    String? @unique
 }
 
 model Track {
-  id      String @id @default(uuid())
+  id      String  @id @default(uuid())
   title   String
   image   String
   preview String
+  Artist  Artist?
 }

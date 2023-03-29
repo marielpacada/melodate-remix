@@ -1,6 +1,6 @@
 import type { LoaderArgs } from "@remix-run/node";
 // import { useLoaderData } from "@remix-run/react";
-import { getRelatedArtists } from "~/services/artist.server";
+import { seedTrackData } from "~/services/artist.server";
 
 import SwipeCard from "~/shared/components/SwipeCard.client";
 
@@ -9,7 +9,7 @@ const Fallback = () => {
 };
 
 export async function loader({ request }: LoaderArgs) {
-  return getRelatedArtists(request);
+  return seedTrackData(request);
   // return {};
 }
 
