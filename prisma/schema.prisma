@@ -23,5 +23,5 @@ model Track {
   title   String
   image   String
   preview String
-  Artist  Artist?
+  artist  Artist?
 }

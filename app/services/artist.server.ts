@@ -1,3 +1,4 @@
+import type { Artist } from "@prisma/client";
 import { spotifyStrategy } from "./auth.server";
 import { db } from "./db.server";
 
@@ -25,25 +26,6 @@ const getUserTopArtists = async (request: Request) => {
   }
 
   return topArtistIds;
-};
-
-const getArtistTopTrack = async (request: Request, artistId: string) => {
-  const url =
-    "https://api.spotify.com/v1/artists/" + artistId + "/top-tracks?country=US";
-  const response = await getFetchResponse(request, url);
-
-  if (response["tracks"].length === 0) return {};
-
-  const track = response["tracks"][0];
-  const trackData = {
-    id: track["id"],
-    title: track["name"],
-    image: "placeholder image", // you can actually get this from the response :)
-    // see the old version
-    preview: track["preview_url"],
-  };
-
-  return trackData;
 };
 
 const getRandomArtists = async (count: number) => {
@@ -99,32 +81,55 @@ const seedArtistData = async (request: Request) => {
       }
     }
   }
-
-  // return the random 30 artists!!!!
-  return await getRandomArtists(30);
 };
 
-export const seedTrackData = async (request: Request) => {
-  const artistsToServe = await seedArtistData(request);
+const seedTrackData = async (request: Request, artists: Array<Artist>) => {
+  for (var artist of artists) {
+    const artistId = artist["id"];
+    const url =
+      "https://api.spotify.com/v1/artists/" +
+      artistId +
+      "/top-tracks?country=US";
+    const response = await getFetchResponse(request, url);
 
-  return {};
+    if (response["tracks"].length === 0) {
+      continue;
+    }
+
+    const track = response["tracks"][0];
+    const trackId = track["id"];
+    const trackData = {
+      id: trackId,
+      title: track["name"],
+      image: track["album"]["images"][0]["url"],
+      preview: track["preview_url"],
+    };
+
+    const doesTrackExist = await db.track.findUnique({
+      where: {
+        id: trackId,
+      },
+    });
+
+    if (!doesTrackExist) {
+      await db.track.create({ data: trackData });
+      await db.track.update({
+        where: { id: trackId },
+        data: { artist: { connect: { id: artistId } } },
+      });
+    }
+  }
 };
 
-// the database is populated with related artists of user's top artists
-// now what?
+export const getArtistsToServe = async (request: Request, count: number) => {
+  await seedArtistData(request);
+  const artistList = await getRandomArtists(count);
+  await seedTrackData(request, artistList);
 
-// what do we want to serve to swipe?
-// first, how many?                         30
-// second, that meet which requirements?    some kind of popularity metric???
+  const artistsWithTracks = await db.artist.findMany({
+    where: { trackId: { not: null } },
+    include: { track: true },
+  });
 
-// CRISIS:   our current model does not already have the artist's top track
-//           we would have to call another endpoint to get their top track
-
-// QUESTION: do we want to do this for all the related artists?
-//           or do we want to do this only for those we have chosen that we are going to serve to the component?
-//
-//
-// THIS ALL TAKES TOO LONG
-// solutions:
-//    - get the random artists server side
-//    - populate the track field of those artists only
+  return artistsWithTracks;
+};
