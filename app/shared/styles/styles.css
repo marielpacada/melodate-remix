@@ -9,10 +9,11 @@ html body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    background-color: #F8F0F0;
+    overflow: hidden;
     font-family: "futura", Verdana, Geneva, Tahoma, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #fff6de;
 }
 
 button {
@@ -32,15 +33,17 @@ button:hover {
 }
 
 .full-page {
+    position: relative;
     height: 95vh;
     width: 100vw;
 }
 
 /* for desktop */
-@media (min-width: 800px) {
+@media (min-width: 750px) {
     .full-page {
+        position: relative;
         height: 95vh;
-        width: 35vw;
+        width: 45vw;
     }
 }
 
@@ -82,6 +85,97 @@ button:hover {
     overflow-wrap: break-word;
 }
 
+.tinder-card {
+    /* allows the cards to be on top of each other */
+    position: absolute;
+    background-color: white;
+    height: 80%;
+    width: 75%;
+}
+
+.image-container {
+    width: 100%;
+    height: 50%;
+}
+
+.name-container {
+    height: 20%;
+}
+
+.artist-name {
+    padding: 1rem 1rem 0 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.artist-followers {
+    padding: .5rem 1rem 0 1rem;
+    font-size: .75rem;
+    color: grey;
+}
+
+.artist-genre {
+    padding: 0 1rem 1rem 1rem;
+    font-size: .75rem;
+    color: forestgreen;
+}
+
+.track-container {
+    background-color: #8FCB9B;
+    height: 30%;
+}
+
+.fit-image {
+    pointer-events: none;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.track-cover-container {
+    width: 50%;
+    height: 100%;
+}
+
+.track-audio-container {
+    width: 50%;
+    height: 100%;
+}
+
+.track-title {
+    font-size: .75rem;
+    padding: .5rem;
+}
+
+.track-preview {
+    padding: .5rem .25rem;
+}
+
+.track-cover {
+    width: 60%;
+    height: auto;
+}
+
+audio::-webkit-media-controls-timeline-container,
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-timeline,
+audio::-webkit-media-controls-volume-slider-container,
+audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-seek-back-button,
+audio::-webkit-media-controls-seek-forward-button,
+audio::-webkit-media-controls-fullscreen-button,
+audio::-webkit-media-controls-rewind-button,
+audio::-webkit-media-controls-return-to-realtime-button,
+audio::-webkit-media-controls-toggle-closed-captions-button {
+    display: none;
+}
+
+audio {
+    width: 100px;
+    height: 2rem;
+}
+
 /* ----------------------------------------------ROW AND COL----------------------------------------------- */
 
 .my-row {
@@ -107,6 +201,11 @@ button:hover {
 .start-center-align {
     justify-content: flex-start;
     align-items: center;
+}
+
+.center-start-align {
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .even-space-align {

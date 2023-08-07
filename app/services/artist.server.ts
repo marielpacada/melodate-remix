@@ -153,9 +153,11 @@ const seedTrackData = async (request: Request, artists: Array<Artist>) => {
  * Returns Artists that will then be loaded in swipe route
  */
 export const getArtistsToServe = async (request: Request, count: number) => {
-  await seedArtistData(request);
-  const artistList = await getRandomArtists(count);
-  await seedTrackData(request, artistList);
+  // how do we make sure this runs only when Track table is empty?
+
+  // await seedArtistData(request);
+  // const artistList = await getRandomArtists(count);
+  // await seedTrackData(request, artistList);
 
   // fetch records from Artist because we need artist fields
   const artistsWithTracks = await db.artist.findMany({
