@@ -9,17 +9,37 @@ const Fallback = () => {
 };
 
 // THE WAY YOU CAN CHECK IF LOADING IS 204 STATUS CODE I THINK
-export async function loader({ request }: LoaderArgs) {
+// so that we can serve a loading screen of sorts???
+export async function loader({ request, context }: LoaderArgs) {
   return getArtistsToServe(request, 30);
 }
 
 export default function Swipe() {
   const data = useLoaderData<typeof loader>();
-  console.log(data);
+
+  if (typeof document !== "undefined") {
+    return (
+      <div className="full-page my-col center-align even-space-align">
+        {data.map((artist, index) => (
+          <SwipeCard
+            key={index}
+            artistName={artist.name}
+            artistImage={artist.image}
+            followers={artist.followers}
+            genre={artist.genre}
+            // Only artists with a track is served (ref: artist.server)
+            trackCover={artist.track!.image || artist.image}
+            trackTitle={artist.track!.title}
+            trackPreview={artist.track!.preview}
+          />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="full-page my-col center-align even-space-align">
-      {typeof document !== "undefined" ? <SwipeCard /> : <Fallback />}
+      <Fallback />
     </div>
   );
 }

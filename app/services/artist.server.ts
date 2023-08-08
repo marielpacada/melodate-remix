@@ -2,6 +2,12 @@ import type { Artist } from "@prisma/client";
 import { spotifyStrategy } from "./auth.server";
 import { db } from "./db.server";
 
+/**
+ * Gets Spotify session response
+ * @param request
+ * @param url: API endpoint
+ * @returns Promise
+ */
 const getFetchResponse = async (request: Request, url: string) => {
   const spotifyRequest = await spotifyStrategy.getSession(request);
   const accessToken = spotifyRequest?.accessToken;
@@ -14,6 +20,11 @@ const getFetchResponse = async (request: Request, url: string) => {
   return response;
 };
 
+/**
+ * Gets user's top artists
+ * @param request
+ * @returns array of strings, length 20
+ */
 const getUserTopArtists = async (request: Request) => {
   const url = "https://api.spotify.com/v1/me/top/artists";
   const response = await getFetchResponse(request, url);
@@ -28,6 +39,11 @@ const getUserTopArtists = async (request: Request) => {
   return topArtistIds;
 };
 
+/**
+ * Gets random selection of artists
+ * @param count
+ * @returns array of Artists, length count
+ */
 const getRandomArtists = async (count: number) => {
   const randomPick = (values: string[]) => {
     const index = Math.floor(Math.random() * values.length);
@@ -52,13 +68,18 @@ const getRandomArtists = async (count: number) => {
   });
 };
 
+/**
+ * Populates Artist table
+ * @param request
+ * Results in table with at most 400 Artist records
+ */
 const seedArtistData = async (request: Request) => {
-  const artistIds = await getUserTopArtists(request);
+  const artistIds = await getUserTopArtists(request); // array of 20
 
   for (var id of artistIds) {
     const url = "https://api.spotify.com/v1/artists/" + id + "/related-artists";
     const response = await getFetchResponse(request, url);
-    const relatedArtists = response["artists"]; // returns 20 artists
+    const relatedArtists = response["artists"]; // array of 20
 
     for (var artist of relatedArtists) {
       const artistData = {
@@ -83,6 +104,12 @@ const seedArtistData = async (request: Request) => {
   }
 };
 
+/**
+ * Populates Track table
+ * @param request
+ * @param artists
+ * Results in table with exactly length of param artists
+ */
 const seedTrackData = async (request: Request, artists: Array<Artist>) => {
   for (var artist of artists) {
     const artistId = artist["id"];
@@ -92,6 +119,7 @@ const seedTrackData = async (request: Request, artists: Array<Artist>) => {
       "/top-tracks?country=US";
     const response = await getFetchResponse(request, url);
 
+    // if the artists does not have any top tracks listed
     if (response["tracks"].length === 0) {
       continue;
     }
@@ -121,11 +149,19 @@ const seedTrackData = async (request: Request, artists: Array<Artist>) => {
   }
 };
 
+/**
+ * Returns Artists that will then be loaded in swipe route
+ */
 export const getArtistsToServe = async (request: Request, count: number) => {
-  await seedArtistData(request);
-  const artistList = await getRandomArtists(count);
-  await seedTrackData(request, artistList);
+  const isArtistDatabasePopulated = !!(await db.artist.findMany()).length;
+  // only need to seed artist db when not populated yet
+  if (!isArtistDatabasePopulated) {
+    await seedArtistData(request);
+    const artistList = await getRandomArtists(count);
+    await seedTrackData(request, artistList);
+  }
 
+  // fetch records from Artist because we need artist fields
   const artistsWithTracks = await db.artist.findMany({
     where: { trackId: { not: null } },
     include: { track: true },
