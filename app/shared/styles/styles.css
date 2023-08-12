@@ -181,10 +181,6 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
     padding: .5rem .25rem;
 }
 
-.view-match-button-container {
-    width: 100%;
-}
-
 /* ----------------------------------------------ROW AND COL----------------------------------------------- */
 
 .my-row {
