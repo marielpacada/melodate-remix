@@ -14,6 +14,7 @@ model Artist {
   followers  Int
   image      String
   popularity Int
+  swiped     Boolean @default(false)
   track      Track?  @relation(fields: [trackId], references: [id])
   trackId    String? @unique
 }

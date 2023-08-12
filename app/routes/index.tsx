@@ -1,8 +1,6 @@
 import type { LoaderArgs } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
-
 import { spotifyStrategy } from "~/services/auth.server";
-
 import PillButton from "~/shared/components/PillButton";
 
 export async function loader({ request }: LoaderArgs) {
@@ -28,6 +26,7 @@ export default function Index() {
         <PillButton
           colorClass="green-button"
           text={user ? "login as " + name : "login to spotify"}
+          isSubmit={false}
           route="/auth/spotify"
         />
 
