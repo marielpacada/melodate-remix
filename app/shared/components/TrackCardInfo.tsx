@@ -8,11 +8,9 @@ export default function TrackCardInfo(props: TrackCardInfoProps) {
   return (
     <>
       <div className="my-row center-align track-cover-container">
-        <img
-          className="fit-image track-cover"
-          src={props.cover}
-          alt={props.title}
-        ></img>
+        <div className="track-cover">
+          <img className="fit-image" src={props.cover} alt={props.title}></img>
+        </div>
       </div>
       <div className="my-col center-start-align track-audio-container">
         <div className="track-title">{props.title}</div>

@@ -27,6 +27,26 @@ button:hover {
     cursor: pointer;
 }
 
+audio {
+    width: 100px;
+    height: 2rem;
+}
+
+audio::-webkit-media-controls-timeline-container,
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-timeline,
+audio::-webkit-media-controls-volume-slider-container,
+audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-seek-back-button,
+audio::-webkit-media-controls-seek-forward-button,
+audio::-webkit-media-controls-fullscreen-button,
+audio::-webkit-media-controls-rewind-button,
+audio::-webkit-media-controls-return-to-realtime-button,
+audio::-webkit-media-controls-toggle-closed-captions-button {
+    display: none;
+}
+
 .full-width-div {
     width: 100%;
     text-align: center;
@@ -34,45 +54,27 @@ button:hover {
 
 .full-page {
     position: relative;
-    height: 95vh;
+    height: 85vh;
     width: 100vw;
 }
 
 /* for desktop */
-@media (min-width: 750px) {
+@media screen and (min-width: 720px) {
     .full-page {
         position: relative;
-        height: 95vh;
+        height: 85vh;
         width: 45vw;
+    }
+
+    .track-cover {
+        width: 120px !important;
+        height: 120px !important;
     }
 }
 
 .melodate-logo {
     height: 10rem;
     width: 10rem;
-}
-
-.pill-button-form {
-    height: 3rem;
-    width: 65%;
-    border: solid 3px;
-    border-radius: 70px;
-}
-
-.pill-button {
-    border-radius: 70px;
-    height: 100%;
-    width: 100%;
-}
-
-.logout-button {
-    color: #0D89D8;
-    font-size: .8rem;
-    text-decoration: underline;
-}
-
-.green-button {
-    background-color: #effff1;
 }
 
 .landing-text {
@@ -83,6 +85,29 @@ button:hover {
     width: 55%;
     font-size: .8rem;
     overflow-wrap: break-word;
+}
+
+.logout-button {
+    color: #0D89D8;
+    font-size: .8rem;
+    text-decoration: underline;
+}
+
+.pill-button {
+    border-radius: 70px;
+    height: 100%;
+    width: 100%;
+}
+
+.pill-button-form {
+    height: 3rem;
+    width: 65%;
+    border: solid 3px;
+    border-radius: 70px;
+}
+
+.green-button {
+    background-color: #effff1;
 }
 
 .tinder-card {
@@ -96,6 +121,13 @@ button:hover {
 .image-container {
     width: 100%;
     height: 50%;
+}
+
+.fit-image {
+    pointer-events: none;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
 }
 
 .name-container {
@@ -125,16 +157,14 @@ button:hover {
     height: 30%;
 }
 
-.fit-image {
-    pointer-events: none;
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-}
-
 .track-cover-container {
     width: 50%;
     height: 100%;
+}
+
+.track-cover {
+    width: 100px;
+    height: 100px;
 }
 
 .track-audio-container {
@@ -151,29 +181,8 @@ button:hover {
     padding: .5rem .25rem;
 }
 
-.track-cover {
-    width: 60%;
-    height: auto;
-}
-
-audio::-webkit-media-controls-timeline-container,
-audio::-webkit-media-controls-current-time-display,
-audio::-webkit-media-controls-time-remaining-display,
-audio::-webkit-media-controls-timeline,
-audio::-webkit-media-controls-volume-slider-container,
-audio::-webkit-media-controls-volume-slider,
-audio::-webkit-media-controls-seek-back-button,
-audio::-webkit-media-controls-seek-forward-button,
-audio::-webkit-media-controls-fullscreen-button,
-audio::-webkit-media-controls-rewind-button,
-audio::-webkit-media-controls-return-to-realtime-button,
-audio::-webkit-media-controls-toggle-closed-captions-button {
-    display: none;
-}
-
-audio {
-    width: 100px;
-    height: 2rem;
+.view-match-button-container {
+    width: 100%;
 }
 
 /* ----------------------------------------------ROW AND COL----------------------------------------------- */
