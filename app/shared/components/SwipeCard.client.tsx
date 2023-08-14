@@ -1,5 +1,5 @@
 import TinderCard from "react-tinder-card";
-import ArtistCardImage from "./ArtistCardImage";
+import CustomImage from "./CustomImage";
 import ArtistCardInfo from "./ArtistCardInfo";
 import TrackCardInfo from "./TrackCardInfo";
 
@@ -28,10 +28,10 @@ export default function SwipeCard(props: SwipeCardProps) {
       onSwipe={props.swipeHandler}
     >
       <div className="image-container">
-        <ArtistCardImage
+        <CustomImage
           src={props.artistImage}
           alt={props.artistName}
-        ></ArtistCardImage>
+        ></CustomImage>
       </div>
       <div className="my-col top-left-align name-container">
         <ArtistCardInfo
