@@ -108,7 +108,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
 
 .match-button-form {
     height: 2rem;
-    width: 15%;
+    width: 25%;
     border: solid 2px;
     margin: 1rem;
 }
@@ -192,8 +192,23 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
     padding: .5rem .25rem;
 }
 
+.match-page {
+    padding: 2rem 0;
+}
+
+.match-option-container {
+    height: 10%;
+}
+
+.match-action-container {
+    height: 10%;
+}
+
 .match-container {
     overflow: scroll;
+    background-color: white;
+    height: calc(80% - 4rem);
+    margin-top: 2rem;
 }
 
 /* ----------------------------------------------ROW AND COL----------------------------------------------- */
