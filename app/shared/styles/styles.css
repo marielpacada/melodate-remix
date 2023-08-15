@@ -21,6 +21,8 @@ button {
     background: none;
     font-family: "futura", Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1rem;
+    height: 100%;
+    width: 100%
 }
 
 button:hover {
@@ -70,6 +72,13 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
         width: 120px !important;
         height: 120px !important;
     }
+
+    .match-container {
+        overflow: scroll;
+        height: calc(80% - 4rem);
+        margin-top: 2rem;
+        border: solid 2px;
+    }
 }
 
 .melodate-logo {
@@ -95,8 +104,6 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
 
 .pill-button {
     border-radius: 70px;
-    height: 100%;
-    width: 100%;
 }
 
 .pill-button-form {
@@ -106,8 +113,19 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
     border-radius: 70px;
 }
 
+.match-button-form {
+    height: 2rem;
+    width: 25%;
+    border: solid 2px;
+    margin: 1rem;
+}
+
 .green-button {
     background-color: #effff1;
+}
+
+.pink-button {
+    background-color: #fadadd;
 }
 
 .tinder-card {
@@ -179,6 +197,40 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
 
 .track-preview {
     padding: .5rem .25rem;
+}
+
+.match-page {
+    padding: 2rem 0;
+}
+
+.match-option-container {
+    height: 10%;
+}
+
+.match-action-container {
+    height: 10%;
+}
+
+.match-container {
+    overflow: scroll;
+    height: calc(80% - 4rem);
+    margin-top: 2rem;
+}
+
+.match-record {
+    background-color: #801650;
+    color: white;
+    width: 65%;
+    height: 4rem;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.match-record-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 2rem;
+    border: solid white 1px;
 }
 
 /* ----------------------------------------------ROW AND COL----------------------------------------------- */

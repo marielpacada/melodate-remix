@@ -1,7 +1,7 @@
 import type { LoaderArgs } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import { spotifyStrategy } from "~/services/auth.server";
-import PillButton from "~/shared/components/PillButton";
+import CustomButton from "~/shared/components/CustomButton";
 
 export async function loader({ request }: LoaderArgs) {
   return spotifyStrategy.getSession(request);
@@ -23,7 +23,8 @@ export default function Index() {
       <div className="landing-text">find your love at first note</div>
 
       <div className="full-width-div my-col center-align">
-        <PillButton
+        <CustomButton
+          buttonClass="pill-button"
           colorClass="green-button"
           text={user ? "login as " + name : "login to spotify"}
           isSubmit={false}

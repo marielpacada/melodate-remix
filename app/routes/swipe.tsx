@@ -4,7 +4,7 @@ import { useLoaderData } from "@remix-run/react";
 import { getArtistsToServe } from "~/services/artist.server";
 import { db } from "~/services/db.server";
 import SwipeCard from "~/shared/components/SwipeCard.client";
-import PillButton from "~/shared/components/PillButton";
+import CustomButton from "~/shared/components/CustomButton";
 
 declare type Direction = "left" | "right" | "up" | "down";
 
@@ -30,7 +30,7 @@ export async function action({ request }: ActionArgs) {
     });
   }
 
-  return redirect("/match");
+  return redirect("/match/artist");
 }
 
 export default function Swipe() {
@@ -67,13 +67,14 @@ export default function Swipe() {
         </div>
 
         <div className="full-width-div my-row center-align">
-          <PillButton
+          <CustomButton
+            buttonClass="pill-button"
             colorClass="green-button"
             text="view your matches now!"
             isSubmit={true}
             inputName="artists"
             inputValue={favoredArtists}
-          ></PillButton>
+          />
         </div>
       </div>
     );

@@ -1,6 +1,7 @@
 import { Form } from "@remix-run/react";
 
 interface CommonProps {
+  buttonClass: string;
   colorClass: string;
   text: string;
 }
@@ -16,22 +17,24 @@ interface FormActionProps extends CommonProps {
   route: string;
 }
 
-type PillButtonProps = FormSubmitProps | FormActionProps;
+type CustomButtonProps = FormSubmitProps | FormActionProps;
 
-export default function PillButton(props: PillButtonProps) {
+export default function CustomButton(props: CustomButtonProps) {
+  const formClass = props.buttonClass
+    .concat("-form my-row center-align ")
+    .concat(props.colorClass);
+
   return (
     <Form
       method="post"
       action={props.isSubmit ? undefined : props.route}
-      className={"pill-button-form my-row center-align "
-        .concat(props.colorClass)
-        .trim()}
+      className={formClass}
     >
       {props.isSubmit && (
         <input type="hidden" name={props.inputName} value={props.inputValue} />
       )}
       <button
-        className="pill-button"
+        className={props.buttonClass}
         type={props.isSubmit ? "submit" : undefined}
       >
         {props.text}
