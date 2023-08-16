@@ -1,24 +1,6 @@
 import type { Artist } from "@prisma/client";
-import { spotifyStrategy } from "./auth.server";
+import { getFetchResponse } from "./session.server";
 import { db } from "./db.server";
-
-/**
- * Gets Spotify session response
- * @param request
- * @param url: API endpoint
- * @returns Promise
- */
-const getFetchResponse = async (request: Request, url: string) => {
-  const spotifyRequest = await spotifyStrategy.getSession(request);
-  const accessToken = spotifyRequest?.accessToken;
-  const options = {
-    method: "GET",
-    headers: { Authorization: "Bearer " + accessToken },
-  };
-
-  const response = await fetch(url, options).then((res) => res.json());
-  return response;
-};
 
 /**
  * Gets user's top artists
