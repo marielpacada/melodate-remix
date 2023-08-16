@@ -9,7 +9,7 @@ import { db } from "./db.server";
  */
 const getUserTopArtists = async (request: Request) => {
   const url = "https://api.spotify.com/v1/me/top/artists";
-  const response = await getFetchResponse(request, url);
+  const response = await getFetchResponse(request, url, "GET");
 
   const topArtistIds = [];
   const topArtists = response["items"];
@@ -60,7 +60,7 @@ const seedArtistData = async (request: Request) => {
 
   for (var id of artistIds) {
     const url = "https://api.spotify.com/v1/artists/" + id + "/related-artists";
-    const response = await getFetchResponse(request, url);
+    const response = await getFetchResponse(request, url, "GET");
     const relatedArtists = response["artists"]; // array of 20
 
     for (var artist of relatedArtists) {
@@ -99,7 +99,7 @@ const seedTrackData = async (request: Request, artists: Array<Artist>) => {
       "https://api.spotify.com/v1/artists/" +
       artistId +
       "/top-tracks?country=US";
-    const response = await getFetchResponse(request, url);
+    const response = await getFetchResponse(request, url, "GET");
 
     // if the artists does not have any top tracks listed
     if (response["tracks"].length === 0) {

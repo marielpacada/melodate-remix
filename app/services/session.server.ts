@@ -20,14 +20,22 @@ export const { getSession, commitSession, destroySession } = sessionStorage;
  * @param url: API endpoint
  * @returns Promise
  */
-export const getFetchResponse = async (request: Request, url: string) => {
+export const getFetchResponse = async (
+  request: Request,
+  url: string,
+  method: string
+) => {
   const spotifyRequest = await spotifyStrategy.getSession(request);
   const accessToken = spotifyRequest?.accessToken;
   const options = {
-    method: "GET",
+    method: method,
     headers: { Authorization: "Bearer " + accessToken },
   };
 
-  const response = await fetch(url, options).then((res) => res.json());
+  let response;
+  if (method === "GET") {
+    response = await fetch(url, options).then((res) => res.json());
+  } else response = {};
+
   return response;
 };
