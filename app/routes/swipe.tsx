@@ -9,9 +9,7 @@ import CustomButton from "~/shared/components/CustomButton";
 
 declare type Direction = "left" | "right" | "up" | "down";
 
-// THE WAY YOU CAN CHECK IF LOADING IS 204 STATUS CODE I THINK
-// so that we can serve a loading screen of sorts???
-export async function loader({ request, context }: LoaderArgs) {
+export async function loader({ request }: LoaderArgs) {
   return getArtistsToServe(request, 30);
 }
 
