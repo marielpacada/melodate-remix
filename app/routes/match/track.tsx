@@ -11,7 +11,10 @@ export async function loader() {
 export async function action({ request }: ActionArgs) {
   const body = await request.formData();
   const recordsFormData = body.get("tracks")?.toString(); // returns a single string
-  await createPlaylist(request, recordsFormData!);
+  // Prevents from creating empty playlist each time user navs to /match/track
+  if (typeof recordsFormData !== "undefined" && recordsFormData.length > 0) {
+    await createPlaylist(request, recordsFormData);
+  }
   return null;
 }
 

@@ -233,6 +233,10 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
     border: solid white 1px;
 }
 
+.empty-table-message {
+    margin: auto;
+}
+
 /* ----------------------------------------------ROW AND COL----------------------------------------------- */
 
 .my-row {

@@ -31,6 +31,9 @@ export const getFavoredTracks = async () => {
  * @returns Promise
  */
 export const followArtists = async (request: Request, artistIds: string) => {
+  if (artistIds.length === 0) {
+    return;
+  }
   const url =
     "https://api.spotify.com/v1/me/following?type=artist&ids=" + artistIds;
   const response = await getFetchResponse(request, url, "PUT");
@@ -44,6 +47,9 @@ export const followArtists = async (request: Request, artistIds: string) => {
  * @returns Promise
  */
 export const createPlaylist = async (request: Request, trackIds: string) => {
+  if (trackIds.length === 0) {
+    return;
+  }
   const userId = await getUserId(request);
   const createPlaylistUrl =
     "https://api.spotify.com/v1/users/" + userId + "/playlists";

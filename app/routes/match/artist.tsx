@@ -11,7 +11,10 @@ export async function loader() {
 export async function action({ request }: ActionArgs) {
   const body = await request.formData();
   const recordsFormData = body.get("artists")?.toString(); // returns a single string
-  await followArtists(request, recordsFormData!);
+  // Prevents from following artists automatically when user navs to /match/artist
+  if (typeof recordsFormData !== "undefined" && recordsFormData.length > 0) {
+    await followArtists(request, recordsFormData);
+  }
   return null;
 }
 

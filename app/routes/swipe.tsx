@@ -9,10 +9,6 @@ import CustomButton from "~/shared/components/CustomButton";
 
 declare type Direction = "left" | "right" | "up" | "down";
 
-const Fallback = () => {
-  return <div>Loading IDE...</div>;
-};
-
 // THE WAY YOU CAN CHECK IF LOADING IS 204 STATUS CODE I THINK
 // so that we can serve a loading screen of sorts???
 export async function loader({ request, context }: LoaderArgs) {
@@ -33,6 +29,10 @@ export async function action({ request }: ActionArgs) {
 
   return redirect("/match/artist");
 }
+
+const Fallback = () => {
+  return <div>Loading IDE...</div>;
+};
 
 export default function Swipe() {
   const data = useLoaderData<typeof loader>();
