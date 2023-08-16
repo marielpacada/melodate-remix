@@ -4,15 +4,18 @@ import MatchRecord from "./MatchRecord";
 type MatchTableProps = {
   buttonText: string;
   records: any[];
+  recordType: string;
+  recordIds: any;
+};
+
+const getLabelProperty = (record: any) => {
+  // if Artist
+  if (typeof record["title"] === "undefined") {
+    return "name";
+  } else return "title"; // if Track
 };
 
 export default function MatchTable(props: MatchTableProps) {
-  function getLabelProperty(record: any) {
-    if (typeof record["title"] === "undefined") {
-      return "name";
-    } else return "title";
-  }
-
   return (
     <>
       <div className="full-width-div match-action-container my-row center-align">
@@ -20,8 +23,9 @@ export default function MatchTable(props: MatchTableProps) {
           buttonClass="pill-button"
           colorClass="green-button"
           text={props.buttonText}
-          isSubmit={false}
-          route="/"
+          isSubmit={true}
+          inputName={props.recordType}
+          inputValue={props.recordIds}
         />
       </div>
 
