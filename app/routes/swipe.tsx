@@ -1,5 +1,6 @@
+import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { useState } from "react";
-import { redirect, type ActionArgs, type LoaderArgs } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { getArtistsToServe } from "~/services/artist.server";
 import { db } from "~/services/db.server";
