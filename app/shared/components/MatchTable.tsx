@@ -34,6 +34,8 @@ export default function MatchTable(props: MatchTableProps) {
           props.records.map((record, index) => (
             <MatchRecord
               key={index}
+              id={record["id"]}
+              type={props.recordType}
               label={record[getLabelProperty(record)]}
               imageAlt={record[getLabelProperty(record)]}
               imageSrc={record["image"]}
