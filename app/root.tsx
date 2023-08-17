@@ -1,4 +1,5 @@
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import Loading from "./shared/components/Loading";
 import stylesPath from "~/shared/styles/styles.css";
 
 import {
@@ -8,6 +9,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigation,
 } from "@remix-run/react";
 
 export const links: LinksFunction = () => {
@@ -21,6 +23,7 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function App() {
+  const navigation = useNavigation();
   return (
     <html lang="en">
       <head>
@@ -28,7 +31,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        {navigation.state !== "idle" ? <Loading /> : <Outlet />}
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
