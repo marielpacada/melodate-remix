@@ -1,11 +1,12 @@
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
-import { useState } from "react";
 import { redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { useState } from "react";
 import { getArtistsToServe } from "~/services/artist.server";
 import { db } from "~/services/db.server";
 import SwipeCard from "~/shared/components/SwipeCard.client";
 import CustomButton from "~/shared/components/CustomButton";
+import Loading from "~/shared/components/Loading";
 
 declare type Direction = "left" | "right" | "up" | "down";
 
@@ -27,10 +28,6 @@ export async function action({ request }: ActionArgs) {
 
   return redirect("/match/artist");
 }
-
-const Fallback = () => {
-  return <div>Loading IDE...</div>;
-};
 
 export default function Swipe() {
   const data = useLoaderData<typeof loader>();
@@ -79,9 +76,5 @@ export default function Swipe() {
     );
   }
 
-  return (
-    <div className="full-page my-col center-align even-space-align">
-      <Fallback />
-    </div>
-  );
+  return <Loading />;
 }

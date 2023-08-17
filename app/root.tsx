@@ -1,5 +1,6 @@
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
-import Loading from "./shared/components/Loading";
+import type { Navigation } from "@remix-run/router";
+import Loading from "~/shared/components/Loading";
 import stylesPath from "~/shared/styles/styles.css";
 
 import {
@@ -22,6 +23,12 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
+const getComponent = (nav: Navigation) => {
+  if (nav.location?.pathname.startsWith("/match")) return <Outlet />;
+  else if (nav.state === "loading") return <Loading />;
+  else return <Outlet />;
+};
+
 export default function App() {
   const navigation = useNavigation();
   return (
@@ -31,7 +38,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        {navigation.state !== "idle" ? <Loading /> : <Outlet />}
+        {getComponent(navigation)}
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
