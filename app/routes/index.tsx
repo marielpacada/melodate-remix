@@ -1,7 +1,8 @@
 import type { LoaderArgs } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import { spotifyStrategy } from "~/services/auth.server";
 import CustomButton from "~/shared/components/CustomButton";
+import TextButton from "~/shared/components/TextButton";
 
 export async function loader({ request }: LoaderArgs) {
   return spotifyStrategy.getSession(request);
@@ -37,9 +38,7 @@ export default function Index() {
               not you? clear your browser's cookies for spotify.com then click
               logout to clear session.
             </p>
-            <Form action="/logout" method="post">
-              <button className="logout-button">logout</button>
-            </Form>
+            <TextButton text="logout" route="/logout" />
           </div>
         )}
       </div>

@@ -135,9 +135,11 @@ const seedTrackData = async (request: Request, artists: Array<Artist>) => {
  * Returns Artists that will then be loaded in swipe route
  */
 export const getArtistsToServe = async (request: Request, count: number) => {
-  const isArtistDatabasePopulated = !!(await db.artist.findMany()).length;
-  // only need to seed artist db when not populated yet
-  if (!isArtistDatabasePopulated) {
+  // database repopulates each time swipe route is loaded
+  const deleteTracks = await db.track.deleteMany({});
+  const deleteArtists = deleteTracks ? await db.artist.deleteMany({}) : null;
+
+  if (deleteArtists) {
     await seedArtistData(request);
     const artistList = await getRandomArtists(count);
     await seedTrackData(request, artistList);

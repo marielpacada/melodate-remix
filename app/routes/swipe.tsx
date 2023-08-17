@@ -1,18 +1,18 @@
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
-import { useState } from "react";
 import { redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { useState } from "react";
 import { getArtistsToServe } from "~/services/artist.server";
 import { db } from "~/services/db.server";
 import SwipeCard from "~/shared/components/SwipeCard.client";
 import CustomButton from "~/shared/components/CustomButton";
+import Loading from "~/shared/components/Loading";
+import TextButton from "~/shared/components/TextButton";
 
 declare type Direction = "left" | "right" | "up" | "down";
 
-// THE WAY YOU CAN CHECK IF LOADING IS 204 STATUS CODE I THINK
-// so that we can serve a loading screen of sorts???
-export async function loader({ request, context }: LoaderArgs) {
-  return getArtistsToServe(request, 30);
+export async function loader({ request }: LoaderArgs) {
+  return getArtistsToServe(request, 2);
 }
 
 export async function action({ request }: ActionArgs) {
@@ -30,10 +30,6 @@ export async function action({ request }: ActionArgs) {
   return redirect("/match/artist");
 }
 
-const Fallback = () => {
-  return <div>Loading IDE...</div>;
-};
-
 export default function Swipe() {
   const data = useLoaderData<typeof loader>();
   const [favoredArtists, setFavoredArtists] = useState<string[]>([]);
@@ -49,6 +45,13 @@ export default function Swipe() {
     return (
       <div className="my-col start-center-align">
         <div className="full-page my-col center-align">
+          <div className="my-col center-align generate-cards">
+            <p>
+              want more artists? if you generate new cards, you'll lose the ones
+              you've swiped right on (╥﹏╥)
+            </p>
+            <TextButton text="generate new cards" route="/auth/spotify" />
+          </div>
           {data.map((artist, index) => (
             <SwipeCard
               key={index}
@@ -81,9 +84,5 @@ export default function Swipe() {
     );
   }
 
-  return (
-    <div className="full-page my-col center-align even-space-align">
-      <Fallback />
-    </div>
-  );
+  return <Loading />;
 }

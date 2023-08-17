@@ -42,7 +42,7 @@ export default function MatchTable(props: MatchTableProps) {
             />
           ))
         ) : (
-          <EmptyTable tableType={props.recordType} />
+          <EmptyTable />
         )}
       </div>
     </>
