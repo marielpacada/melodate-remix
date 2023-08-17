@@ -96,7 +96,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
     overflow-wrap: break-word;
 }
 
-.logout-button {
+.text-button {
     color: #0D89D8;
     font-size: .8rem;
     text-decoration: underline;
@@ -244,6 +244,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
 
 .empty-table-message {
     margin: auto;
+    padding: 3rem;
 }
 
 /* ----------------------------------------------ROW AND COL----------------------------------------------- */
