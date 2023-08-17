@@ -7,11 +7,12 @@ import { db } from "~/services/db.server";
 import SwipeCard from "~/shared/components/SwipeCard.client";
 import CustomButton from "~/shared/components/CustomButton";
 import Loading from "~/shared/components/Loading";
+import TextButton from "~/shared/components/TextButton";
 
 declare type Direction = "left" | "right" | "up" | "down";
 
 export async function loader({ request }: LoaderArgs) {
-  return getArtistsToServe(request, 30);
+  return getArtistsToServe(request, 2);
 }
 
 export async function action({ request }: ActionArgs) {
@@ -44,6 +45,13 @@ export default function Swipe() {
     return (
       <div className="my-col start-center-align">
         <div className="full-page my-col center-align">
+          <div className="my-col center-align generate-cards">
+            <p>
+              want more artists? if you generate new cards, you'll lose the ones
+              you've swiped right on (╥﹏╥)
+            </p>
+            <TextButton text="generate new cards" route="/auth/spotify" />
+          </div>
           {data.map((artist, index) => (
             <SwipeCard
               key={index}
