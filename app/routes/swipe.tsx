@@ -2,7 +2,7 @@ import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import type { Direction } from "react-tinder-card";
 import { redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { getArtistsToServe } from "~/services/artist.server";
 import { db } from "~/services/db.server";
 import React from "react";
@@ -34,7 +34,7 @@ export default function Swipe() {
   const data = useLoaderData<typeof loader>();
   const [favoredArtists, setFavoredArtists] = useState<string[]>([]);
   const [cardIndex, setCardIndex] = useState<number>(data.length - 1);
-
+  const cardParentDiv = useRef<any>();
   const cardRefs = Array(data.length)
     .fill(0)
     .map(() => React.createRef<any>());
@@ -57,16 +57,33 @@ export default function Swipe() {
     }
   };
 
+  const pauseAudio = () => {
+    const audioElement =
+      cardParentDiv.current.children[cardIndex + 1].children[2].children[1]
+        .children[1].children[0];
+    audioElement.pause();
+  };
+
+  // const playAudio = () => {
+  //   const audioElement =
+  //     cardParentDiv.current.children[cardIndex + 1].children[2].children[1]
+  //       .children[1].children[0];
+  //   audioElement.play();
+  // };
+
   const useArrowKeys = (e: KeyboardEvent) => {
-    if (e.key === "ArrowLeft") swipe("left");
-    else if (e.key === "ArrowRight") swipe("right");
+    if (e.code === "ArrowLeft") swipe("left");
+    else if (e.code === "ArrowRight") swipe("right");
+    else if (e.code === "Space") {
+      pauseAudio();
+    }
   };
 
   if (typeof document !== "undefined") {
     document.addEventListener("keydown", useArrowKeys);
     return (
       <div className="my-col start-center-align">
-        <div className="full-page my-col center-align">
+        <div className="full-page my-col center-align" ref={cardParentDiv}>
           <div className="my-col center-align generate-cards">
             <p>
               want more artists? if you generate new cards, you'll lose the ones
@@ -89,6 +106,7 @@ export default function Swipe() {
               swipeHandler={(direction: Direction) =>
                 updateSwiped(direction, artist.id, index)
               }
+              cardLeftHandler={pauseAudio}
             />
           ))}
         </div>

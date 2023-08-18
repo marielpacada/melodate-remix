@@ -1,6 +1,10 @@
 import type { ForwardRefRenderFunction } from "react";
-import type { Props, SwipeHandler } from "react-tinder-card";
-import { useRef, forwardRef } from "react";
+import type {
+  Props,
+  SwipeHandler,
+  CardLeftScreenHandler,
+} from "react-tinder-card";
+import { forwardRef } from "react";
 import TinderCard from "react-tinder-card";
 import CustomImage from "./CustomImage";
 import ArtistCardInfo from "./ArtistCardInfo";
@@ -18,6 +22,7 @@ export interface SwipeCardProps {
   trackPreview: string;
 
   swipeHandler: SwipeHandler;
+  cardLeftHandler: CardLeftScreenHandler;
 }
 
 const SwipeCard: ForwardRefRenderFunction<React.FC<Props>, SwipeCardProps> = (
@@ -35,14 +40,8 @@ const SwipeCard: ForwardRefRenderFunction<React.FC<Props>, SwipeCardProps> = (
     trackPreview,
 
     swipeHandler,
+    cardLeftHandler,
   } = props;
-
-  const audioParentDiv = useRef<any>();
-  const pauseAudio = () => {
-    const audioElement =
-      audioParentDiv.current.children[1].children[1].children[0];
-    audioElement.pause();
-  };
 
   return (
     <TinderCard
@@ -50,7 +49,7 @@ const SwipeCard: ForwardRefRenderFunction<React.FC<Props>, SwipeCardProps> = (
       className="tinder-card"
       preventSwipe={["up", "down"]}
       onSwipe={swipeHandler}
-      onCardLeftScreen={pauseAudio}
+      onCardLeftScreen={cardLeftHandler}
     >
       <div className="image-container">
         <CustomImage src={artistImage} alt={artistName}></CustomImage>
@@ -62,10 +61,7 @@ const SwipeCard: ForwardRefRenderFunction<React.FC<Props>, SwipeCardProps> = (
           genre={genre}
         ></ArtistCardInfo>
       </div>
-      <div
-        className="my-row space-btwn-align track-container"
-        ref={audioParentDiv}
-      >
+      <div className="my-row space-btwn-align track-container">
         <TrackCardInfo
           cover={trackCover}
           title={trackTitle}
