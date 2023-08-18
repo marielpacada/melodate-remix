@@ -12,7 +12,7 @@ import TextButton from "~/shared/components/TextButton";
 declare type Direction = "left" | "right" | "up" | "down";
 
 export async function loader({ request }: LoaderArgs) {
-  return getArtistsToServe(request, 2);
+  return getArtistsToServe(request, 30);
 }
 
 export async function action({ request }: ActionArgs) {

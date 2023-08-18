@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import TinderCard from "react-tinder-card";
 import CustomImage from "./CustomImage";
 import ArtistCardInfo from "./ArtistCardInfo";
@@ -21,11 +22,19 @@ type SwipeCardProps = {
 };
 
 export default function SwipeCard(props: SwipeCardProps) {
+  const audioParentDiv = useRef<any>();
+  const pauseAudio = () => {
+    const audioElement =
+      audioParentDiv.current.children[1].children[1].children[0];
+    audioElement.pause();
+  };
+
   return (
     <TinderCard
       className="tinder-card"
       preventSwipe={["up", "down"]}
       onSwipe={props.swipeHandler}
+      onCardLeftScreen={pauseAudio}
     >
       <div className="image-container">
         <CustomImage
@@ -40,7 +49,10 @@ export default function SwipeCard(props: SwipeCardProps) {
           genre={props.genre}
         ></ArtistCardInfo>
       </div>
-      <div className="my-row space-btwn-align track-container">
+      <div
+        className="my-row space-btwn-align track-container"
+        ref={audioParentDiv}
+      >
         <TrackCardInfo
           cover={props.trackCover}
           title={props.trackTitle}
