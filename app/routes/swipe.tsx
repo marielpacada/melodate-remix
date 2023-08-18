@@ -1,15 +1,15 @@
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
+import type { Direction } from "react-tinder-card";
 import { redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import { getArtistsToServe } from "~/services/artist.server";
 import { db } from "~/services/db.server";
+import React from "react";
 import SwipeCard from "~/shared/components/SwipeCard.client";
 import CustomButton from "~/shared/components/CustomButton";
 import Loading from "~/shared/components/Loading";
 import TextButton from "~/shared/components/TextButton";
-
-declare type Direction = "left" | "right" | "up" | "down";
 
 export async function loader({ request }: LoaderArgs) {
   return getArtistsToServe(request, 30);
@@ -30,20 +30,36 @@ export async function action({ request }: ActionArgs) {
   return redirect("/match/artist");
 }
 
-const useArrowKeys = (e: KeyboardEvent) => {
-  if (e.key === "ArrowLeft") console.log("swiped left");
-  else if (e.key === "ArrowRight") console.log("swiped right");
-};
-
 export default function Swipe() {
   const data = useLoaderData<typeof loader>();
   const [favoredArtists, setFavoredArtists] = useState<string[]>([]);
+  const [cardIndex, setCardIndex] = useState<number>(data.length - 1);
 
-  const updateSwiped = (direction: Direction, artistId: string) => {
+  const cardRefs = Array(data.length)
+    .fill(0)
+    .map(() => React.createRef<any>());
+
+  const updateSwiped = (
+    direction: Direction,
+    artistId: string,
+    index: number
+  ) => {
     if (direction === "right") {
       const updateArtists = [...favoredArtists, artistId];
       setFavoredArtists(updateArtists);
     }
+    setCardIndex(index - 1);
+  };
+
+  const swipe = (direction: Direction) => {
+    if (cardIndex >= 0 && cardIndex < data.length) {
+      cardRefs[cardIndex].current.swipe(direction);
+    }
+  };
+
+  const useArrowKeys = (e: KeyboardEvent) => {
+    if (e.key === "ArrowLeft") swipe("left");
+    else if (e.key === "ArrowRight") swipe("right");
   };
 
   if (typeof document !== "undefined") {
@@ -61,6 +77,7 @@ export default function Swipe() {
           {data.map((artist, index) => (
             <SwipeCard
               key={index}
+              ref={cardRefs[index]}
               artistName={artist.name}
               artistImage={artist.image}
               followers={artist.followers}
@@ -70,7 +87,7 @@ export default function Swipe() {
               trackTitle={artist.track!.title}
               trackPreview={artist.track!.preview}
               swipeHandler={(direction: Direction) =>
-                updateSwiped(direction, artist.id)
+                updateSwiped(direction, artist.id, index)
               }
             />
           ))}

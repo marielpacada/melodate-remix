@@ -1,13 +1,12 @@
-import { useRef } from "react";
+import type { ForwardRefRenderFunction } from "react";
+import type { Props, SwipeHandler } from "react-tinder-card";
+import { useRef, forwardRef } from "react";
 import TinderCard from "react-tinder-card";
 import CustomImage from "./CustomImage";
 import ArtistCardInfo from "./ArtistCardInfo";
 import TrackCardInfo from "./TrackCardInfo";
 
-declare type Direction = "left" | "right" | "up" | "down";
-declare type SwipeHandler = (direction: Direction) => void;
-
-type SwipeCardProps = {
+export interface SwipeCardProps {
   key: number;
   artistName: string;
   artistImage: string;
@@ -19,9 +18,25 @@ type SwipeCardProps = {
   trackPreview: string;
 
   swipeHandler: SwipeHandler;
-};
+}
 
-export default function SwipeCard(props: SwipeCardProps) {
+const SwipeCard: ForwardRefRenderFunction<React.FC<Props>, SwipeCardProps> = (
+  props,
+  ref
+) => {
+  const {
+    artistName,
+    artistImage,
+    followers,
+    genre,
+
+    trackCover,
+    trackTitle,
+    trackPreview,
+
+    swipeHandler,
+  } = props;
+
   const audioParentDiv = useRef<any>();
   const pauseAudio = () => {
     const audioElement =
@@ -31,22 +46,20 @@ export default function SwipeCard(props: SwipeCardProps) {
 
   return (
     <TinderCard
+      ref={ref}
       className="tinder-card"
       preventSwipe={["up", "down"]}
-      onSwipe={props.swipeHandler}
+      onSwipe={swipeHandler}
       onCardLeftScreen={pauseAudio}
     >
       <div className="image-container">
-        <CustomImage
-          src={props.artistImage}
-          alt={props.artistName}
-        ></CustomImage>
+        <CustomImage src={artistImage} alt={artistName}></CustomImage>
       </div>
       <div className="my-col top-left-align name-container">
         <ArtistCardInfo
-          name={props.artistName}
-          followers={props.followers}
-          genre={props.genre}
+          name={artistName}
+          followers={followers}
+          genre={genre}
         ></ArtistCardInfo>
       </div>
       <div
@@ -54,11 +67,13 @@ export default function SwipeCard(props: SwipeCardProps) {
         ref={audioParentDiv}
       >
         <TrackCardInfo
-          cover={props.trackCover}
-          title={props.trackTitle}
-          preview={props.trackPreview}
+          cover={trackCover}
+          title={trackTitle}
+          preview={trackPreview}
         ></TrackCardInfo>
       </div>
     </TinderCard>
   );
-}
+};
+
+export default forwardRef<React.FC<Props>, SwipeCardProps>(SwipeCard);
