@@ -30,6 +30,11 @@ export async function action({ request }: ActionArgs) {
   return redirect("/match/artist");
 }
 
+const useArrowKeys = (e: KeyboardEvent) => {
+  if (e.key === "ArrowLeft") console.log("swiped left");
+  else if (e.key === "ArrowRight") console.log("swiped right");
+};
+
 export default function Swipe() {
   const data = useLoaderData<typeof loader>();
   const [favoredArtists, setFavoredArtists] = useState<string[]>([]);
@@ -42,6 +47,7 @@ export default function Swipe() {
   };
 
   if (typeof document !== "undefined") {
+    document.addEventListener("keydown", useArrowKeys);
     return (
       <div className="my-col start-center-align">
         <div className="full-page my-col center-align">
