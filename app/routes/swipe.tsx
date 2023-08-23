@@ -57,25 +57,41 @@ export default function Swipe() {
     }
   };
 
-  const pauseAudio = () => {
+  const pauseAudio = (audio: HTMLAudioElement) => {
+    audio.pause();
+  };
+
+  const playAudio = (audio: HTMLAudioElement) => {
+    audio.play();
+  };
+
+  const interactAudio = () => {
+    const audioElement =
+      cardParentDiv.current.children[cardIndex + 1].children[2].children[1]
+        .children[1].children[0];
+    const name =
+      cardParentDiv.current.children[cardIndex + 1].children[1].children[0];
+    console.log(name);
+    if (audioElement?.paused) playAudio(audioElement);
+    else pauseAudio(audioElement);
+  };
+
+  const leaveScreen = () => {
     const audioElement =
       cardParentDiv.current.children[cardIndex + 1].children[2].children[1]
         .children[1].children[0];
     audioElement.pause();
   };
 
-  // const playAudio = () => {
-  //   const audioElement =
-  //     cardParentDiv.current.children[cardIndex + 1].children[2].children[1]
-  //       .children[1].children[0];
-  //   audioElement.play();
-  // };
-
   const useArrowKeys = (e: KeyboardEvent) => {
     if (e.code === "ArrowLeft") swipe("left");
     else if (e.code === "ArrowRight") swipe("right");
     else if (e.code === "Space") {
-      pauseAudio();
+      // every time we press space, the actual current card ref is played and immediately paused
+      // only the first one is actually played and paused properly
+      // all preceding cards follow the immediate play/pause behavior
+      // question: why is it keeping the ref of all previous cards?
+      interactAudio();
     }
   };
 
@@ -106,7 +122,7 @@ export default function Swipe() {
               swipeHandler={(direction: Direction) =>
                 updateSwiped(direction, artist.id, index)
               }
-              cardLeftHandler={pauseAudio}
+              cardLeftHandler={leaveScreen}
             />
           ))}
         </div>
