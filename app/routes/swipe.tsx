@@ -69,9 +69,6 @@ export default function Swipe() {
     const audioElement =
       cardParentDiv.current.children[cardIndex + 1].children[2].children[1]
         .children[1].children[0];
-    const name =
-      cardParentDiv.current.children[cardIndex + 1].children[1].children[0];
-    console.log(name);
     if (audioElement?.paused) playAudio(audioElement);
     else pauseAudio(audioElement);
   };
@@ -87,10 +84,9 @@ export default function Swipe() {
     if (e.code === "ArrowLeft") swipe("left");
     else if (e.code === "ArrowRight") swipe("right");
     else if (e.code === "Space") {
-      // every time we press space, the actual current card ref is played and immediately paused
-      // only the first one is actually played and paused properly
-      // all preceding cards follow the immediate play/pause behavior
-      // question: why is it keeping the ref of all previous cards?
+      // PROBLEM: without this print, only audio of the first card is interactable
+      // TODO: figure out why that is
+      console.log(cardRefs[cardIndex].current.children);
       interactAudio();
     }
   };
