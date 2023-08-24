@@ -4,6 +4,7 @@ import EmptyTable from "./EmptyTable";
 
 type MatchTableProps = {
   buttonText: string;
+  buttonDisabled?: boolean;
   records: any[];
   recordType: string;
   recordIds: any;
@@ -23,6 +24,7 @@ export default function MatchTable(props: MatchTableProps) {
           buttonClass="pill-button"
           colorClass="green-button"
           text={props.buttonText}
+          isDisabled={props.buttonDisabled}
           isSubmit={true}
           inputName={props.recordType}
           inputValue={props.recordIds}

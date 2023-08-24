@@ -29,6 +29,12 @@ button:hover {
     cursor: pointer;
 }
 
+button:disabled {
+    background-color: lightgray;
+    color: black;
+    cursor: auto;
+}
+
 audio {
     width: 100px;
     height: 2rem;

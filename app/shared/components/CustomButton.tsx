@@ -4,6 +4,7 @@ interface CommonProps {
   buttonClass: string;
   colorClass: string;
   text: string;
+  isDisabled?: boolean;
 }
 
 interface FormSubmitProps extends CommonProps {
@@ -34,6 +35,7 @@ export default function CustomButton(props: CustomButtonProps) {
         <input type="hidden" name={props.inputName} value={props.inputValue} />
       )}
       <button
+        disabled={props.isDisabled}
         className={props.buttonClass}
         type={props.isSubmit ? "submit" : undefined}
       >
