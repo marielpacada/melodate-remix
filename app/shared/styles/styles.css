@@ -232,7 +232,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
 .match-container {
     overflow: scroll;
     height: calc(80% - 4rem);
-    margin-top: 2rem;
+    margin: 2rem 0;
 }
 
 .match-record {

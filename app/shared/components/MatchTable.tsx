@@ -1,6 +1,7 @@
 import CustomButton from "./CustomButton";
 import MatchRecord from "./MatchRecord";
 import EmptyTable from "./EmptyTable";
+import TextButton from "./TextButton";
 
 type MatchTableProps = {
   buttonText: string;
@@ -30,7 +31,6 @@ export default function MatchTable(props: MatchTableProps) {
           inputValue={props.recordIds}
         />
       </div>
-
       <div className="full-width-div match-container my-col start-center-align">
         {props.records.length > 0 ? (
           props.records.map((record, index) => (
@@ -47,6 +47,9 @@ export default function MatchTable(props: MatchTableProps) {
           <EmptyTable />
         )}
       </div>
+      {props.records.length > 0 && (
+        <TextButton text="swipe on new artists" route="/auth/spotify" />
+      )}
     </>
   );
 }
