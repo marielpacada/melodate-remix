@@ -1,7 +1,7 @@
 import type { ActionArgs } from "@remix-run/node";
 import type { Artist, Track } from "@prisma/client";
-import { useLoaderData } from "@remix-run/react";
-import { useState } from "react";
+import { useLoaderData, useNavigation } from "@remix-run/react";
+import { useState, useEffect } from "react";
 import {
   getFavoredArtists,
   getFavoredTracks,
@@ -29,7 +29,8 @@ export async function action({ request }: ActionArgs) {
   if (typeof recordsFormData !== "undefined" && recordsFormData.length > 0) {
     if (formDataType === "artists")
       await followArtists(request, recordsFormData);
-    else await createPlaylist(request, recordsFormData);
+    else if (formDataType === "tracks")
+      await createPlaylist(request, recordsFormData);
   }
 
   return null;
@@ -37,9 +38,10 @@ export async function action({ request }: ActionArgs) {
 
 export default function Match() {
   const data = useLoaderData<typeof loader>();
-  const artists = data.artists;
-  const tracks = data.tracks;
+  const navigation = useNavigation();
   const [activeTab, setActiveTab] = useState<string>("artists");
+  const [followDisabled, setFollowDisabled] = useState<boolean>(false);
+  const [playlistDisabled, setPlaylistDisabled] = useState<boolean>(false);
 
   const handleClickTabs = (event: React.MouseEvent<HTMLElement>) => {
     const tab = event.currentTarget.textContent;
@@ -51,6 +53,13 @@ export default function Match() {
     for (var record of records) ids.push(record.id);
     return ids;
   };
+
+  useEffect(() => {
+    if (navigation.state === "submitting") {
+      if (activeTab === "artists") setFollowDisabled(true);
+      else if (activeTab === "tracks") setPlaylistDisabled(true);
+    }
+  }, [navigation.state, activeTab]);
 
   return (
     <div className="full-page match-page my-col start-center-align">
@@ -68,17 +77,19 @@ export default function Match() {
       </div>
       {activeTab === "artists" ? (
         <MatchTable
-          buttonText="follow artists"
-          records={artists}
+          buttonText={followDisabled ? "followed!" : "follow artists"}
+          buttonDisabled={followDisabled}
+          records={data.artists}
           recordType="artists"
-          recordIds={getRecordIds(artists)}
+          recordIds={getRecordIds(data.artists)}
         />
       ) : (
         <MatchTable
-          buttonText="create playlist"
-          records={tracks}
+          buttonText={playlistDisabled ? "created!" : "create playlist"}
+          buttonDisabled={playlistDisabled}
+          records={data.tracks}
           recordType="tracks"
-          recordIds={getRecordIds(tracks)}
+          recordIds={getRecordIds(data.tracks)}
         />
       )}
     </div>
