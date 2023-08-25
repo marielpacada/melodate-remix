@@ -38,6 +38,7 @@ export async function action({ request }: ActionArgs) {
 
 export default function Match() {
   const data = useLoaderData<typeof loader>();
+  const artistCount = data.artists.length;
   const navigation = useNavigation();
   const [activeTab, setActiveTab] = useState<string>("artists");
   const [followDisabled, setFollowDisabled] = useState<boolean>(false);
@@ -77,7 +78,9 @@ export default function Match() {
       </div>
       {activeTab === "artists" ? (
         <MatchTable
-          buttonText={followDisabled ? "followed!" : "follow artists"}
+          buttonText={
+            followDisabled ? "followed!" : "follow " + artistCount + " artists"
+          }
           buttonDisabled={followDisabled}
           records={data.artists}
           recordType="artists"

@@ -231,7 +231,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
 
 .match-container {
     overflow: scroll;
-    height: calc(80% - 4rem);
+    height: 70%;
     margin: 2rem 0;
 }
 
