@@ -27,7 +27,7 @@ export async function action({ request }: ActionArgs) {
     });
   }
 
-  return redirect("/match/artist");
+  return redirect("/match");
 }
 
 export default function Swipe() {

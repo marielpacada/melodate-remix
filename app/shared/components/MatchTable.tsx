@@ -1,9 +1,11 @@
 import CustomButton from "./CustomButton";
 import MatchRecord from "./MatchRecord";
 import EmptyTable from "./EmptyTable";
+import TextButton from "./TextButton";
 
 type MatchTableProps = {
   buttonText: string;
+  buttonDisabled?: boolean;
   records: any[];
   recordType: string;
   recordIds: any;
@@ -23,12 +25,12 @@ export default function MatchTable(props: MatchTableProps) {
           buttonClass="pill-button"
           colorClass="green-button"
           text={props.buttonText}
+          isDisabled={props.buttonDisabled}
           isSubmit={true}
           inputName={props.recordType}
           inputValue={props.recordIds}
         />
       </div>
-
       <div className="full-width-div match-container my-col start-center-align">
         {props.records.length > 0 ? (
           props.records.map((record, index) => (
@@ -45,6 +47,9 @@ export default function MatchTable(props: MatchTableProps) {
           <EmptyTable />
         )}
       </div>
+      {props.records.length > 0 && (
+        <TextButton text="swipe on new artists" route="/auth/spotify" />
+      )}
     </>
   );
 }
