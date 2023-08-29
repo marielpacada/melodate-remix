@@ -21,6 +21,7 @@
     "remix-auth-spotify": "^1.2.9"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.4.8",
     "@remix-run/dev": "^1.14.3",
     "@remix-run/eslint-config": "^1.14.3",
     "@types/react": "^18.0.25",
