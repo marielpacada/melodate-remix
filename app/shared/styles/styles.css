@@ -1,7 +1,11 @@
+/* -------------------------------------------------FONTS-------------------------------------------------- */
+
 @font-face {
     font-family: "futura";
     src: url("public/fonts/futura/futura-medium.ttf");
 }
+
+/* --------------------------------------------------TAGS-------------------------------------------------- */
 
 html body {
     margin: 0;
@@ -19,10 +23,15 @@ html body {
 button {
     border: none;
     background: none;
+    color: black;
     font-family: "futura", Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1rem;
     height: 100%;
     width: 100%
+}
+
+form {
+    color: black
 }
 
 button:hover {
@@ -55,6 +64,8 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
     display: none;
 }
 
+/* -------------------------------------------------SHARED------------------------------------------------- */
+
 .full-width-div {
     width: 100%;
     text-align: center;
@@ -66,26 +77,33 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
     width: 100vw;
 }
 
-/* for desktop */
-@media screen and (min-width: 720px) {
-    .full-page {
-        position: relative;
-        height: 85vh;
-        width: 45vw;
-    }
-
-    .track-cover {
-        width: 120px !important;
-        height: 120px !important;
-    }
-
-    .match-container {
-        overflow: scroll;
-        height: calc(80% - 4rem);
-        margin-top: 2rem;
-        border: solid 2px;
-    }
+.pill-button {
+    border-radius: 70px;
 }
+
+.pill-button-form {
+    height: 3rem;
+    width: 65%;
+    border: solid 3px;
+    border-radius: 70px;
+}
+
+.green-button {
+    background-color: #effff1;
+}
+
+.pink-button {
+    background-color: #fadadd;
+}
+
+.fit-image {
+    pointer-events: none;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+/* -------------------------------------------------INDEX-------------------------------------------------- */
 
 .melodate-logo {
     height: 10rem;
@@ -102,50 +120,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
     overflow-wrap: break-word;
 }
 
-.text-button {
-    color: #0D89D8;
-    font-size: .8rem;
-    text-decoration: underline;
-}
-
-.pill-button {
-    border-radius: 70px;
-}
-
-.pill-button-form {
-    height: 3rem;
-    width: 65%;
-    border: solid 3px;
-    border-radius: 70px;
-}
-
-.match-tab {
-    height: 2rem;
-    width: 25%;
-    border: solid 2px;
-    margin: 1rem;
-    cursor: pointer;
-}
-
-.active-tab {
-    background-color: #f4adb4;
-}
-
-.green-button {
-    background-color: #effff1;
-}
-
-.pink-button {
-    background-color: #fadadd;
-}
-
-.tinder-card {
-    /* allows the cards to be on top of each other */
-    position: absolute;
-    background-color: white;
-    height: 80%;
-    width: 75%;
-}
+/* -------------------------------------------------SWIPE-------------------------------------------------- */
 
 .generate-cards {
     position: absolute;
@@ -154,16 +129,40 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
     text-align: center;
 }
 
+.view-match-button {
+    margin-top: auto;
+}
+
+/* -------------------------------------------------MATCH-------------------------------------------------- */
+
+.match-page {
+    padding: 2rem 0;
+}
+
+.match-tab-container {
+    padding-top: 1rem;
+    padding-bottom: .2rem;
+}
+
+/* -----------------------------------------------COMPONENTS----------------------------------------------- */
+
+.text-button {
+    color: #0D89D8;
+    font-size: .8rem;
+    text-decoration: underline;
+}
+
+.tinder-card {
+    /* allows the cards to be on top of each other */
+    position: absolute;
+    background-color: white;
+    height: 70%;
+    width: 75%;
+}
+
 .image-container {
     width: 100%;
     height: 50%;
-}
-
-.fit-image {
-    pointer-events: none;
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
 }
 
 .name-container {
@@ -217,12 +216,16 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
     padding: .5rem .25rem;
 }
 
-.match-page {
-    padding: 2rem 0;
+.match-tab {
+    height: 2rem;
+    width: 25%;
+    border: solid 2px;
+    margin: 1rem;
+    cursor: pointer;
 }
 
-.match-tab-container {
-    height: 10%;
+.active-tab {
+    background-color: #f4adb4;
 }
 
 .match-action-container {
@@ -232,7 +235,7 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
 .match-container {
     overflow: scroll;
     height: 70%;
-    margin: 2rem 0;
+    margin-bottom: .2rem;
 }
 
 .match-record {
@@ -305,4 +308,26 @@ audio::-webkit-media-controls-toggle-closed-captions-button {
 .space-btwn-align {
     justify-content: space-between;
     align-items: center;
+}
+
+/* ------------------------------------------------DESKTOP------------------------------------------------- */
+
+@media screen and (min-width: 720px) {
+    .full-page {
+        position: relative;
+        height: 85vh;
+        width: 45vw;
+    }
+
+    .track-cover {
+        width: 120px !important;
+        height: 120px !important;
+    }
+
+    .match-container {
+        overflow: scroll;
+        height: calc(80% - 4rem);
+        margin-top: 2rem;
+        border: solid 2px;
+    }
 }

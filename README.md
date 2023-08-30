@@ -2,7 +2,7 @@
 
 ### _find your love at first note_
 
-**melodate** is a mobile web app experience that allows the user to discover new artists à la online dating ✨🎶
+**melodate** is a web app experience that allows the user to discover new artists à la online dating ✨🎶
 
 ## motivation
 
@@ -11,6 +11,10 @@ melodate came about as a way for me to automate and enhance my process in lookin
 ## experience
 
 the melodate experience is unique to each user! the application prompts the user to log in through spotify, which it leverages to get the user's top artists in the last month. the app then shuffles through those artists' related artists, and presents them in the swipe-right, swipe-left format some of us have gotten (too) familiar with. the user can view each artist's genres and top song, allowing him/her to determine whether the artist is hot ♥️️➡️ or not ❌⬅️. the app also allows the user to follow the spotify accounts and/or make a playlist of the top songs of the artists they swiped right on.
+
+## access
+
+melodate is now deployed on [https://melodate-remix.fly.dev/](https://melodate-remix.fly.dev/). use the app on either mobile or desktop! and of course, you must be a spotify user to use melodate.
 
 ## tech used
 
