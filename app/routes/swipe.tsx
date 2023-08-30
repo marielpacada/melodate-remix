@@ -121,17 +121,16 @@ export default function Swipe() {
               cardLeftHandler={leaveScreen}
             />
           ))}
-        </div>
-
-        <div className="full-width-div my-row center-align">
-          <CustomButton
-            buttonClass="pill-button"
-            colorClass="green-button"
-            text="view your matches now!"
-            isSubmit={true}
-            inputName="artists"
-            inputValue={favoredArtists}
-          />
+          <div className="full-width-div my-row center-align view-match-button">
+            <CustomButton
+              buttonClass="pill-button"
+              colorClass="green-button"
+              text="view your matches now!"
+              isSubmit={true}
+              inputName="artists"
+              inputValue={favoredArtists}
+            />
+          </div>
         </div>
       </div>
     );

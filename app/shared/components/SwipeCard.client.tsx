@@ -50,6 +50,8 @@ const SwipeCard: ForwardRefRenderFunction<React.FC<Props>, SwipeCardProps> = (
       preventSwipe={["up", "down"]}
       onSwipe={swipeHandler}
       onCardLeftScreen={cardLeftHandler}
+      swipeRequirementType="position"
+      swipeThreshold={50}
     >
       <div className="image-container">
         <CustomImage src={artistImage} alt={artistName}></CustomImage>
